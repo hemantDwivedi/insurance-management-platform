@@ -2,6 +2,7 @@ package com.insuremyteam.insurancemanagement.controllers;
 
 import com.insuremyteam.insurancemanagement.payload.ClientDAO;
 import com.insuremyteam.insurancemanagement.service.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ClientController {
 
     // create a new client
     @PostMapping
-    public ResponseEntity<ClientDAO> createClient(@RequestBody ClientDAO clientDAO){
+    public ResponseEntity<ClientDAO> createClient(@Valid @RequestBody ClientDAO clientDAO){
         return new ResponseEntity<>(this.clientService.createClient(clientDAO), HttpStatus.CREATED);
     }
 
@@ -37,7 +38,7 @@ public class ClientController {
 
     // update a client's information
     @PutMapping("/{clientId}")
-    public ResponseEntity<ClientDAO> getClientById(@PathVariable Integer clientId, @RequestBody ClientDAO clientDAO){
+    public ResponseEntity<ClientDAO> getClientById(@Valid @PathVariable Integer clientId, @RequestBody ClientDAO clientDAO){
         return new ResponseEntity<>(this.clientService.updateClient(clientId, clientDAO), HttpStatus.OK);
     }
 
