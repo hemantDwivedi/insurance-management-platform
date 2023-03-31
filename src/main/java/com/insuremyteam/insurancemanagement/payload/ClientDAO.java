@@ -13,6 +13,7 @@ public class ClientDAO {
     private Integer Id;
     @NotBlank(message = "name is mandatory")
     private String name;
+    @NotBlank(message = "Date of Birth should be blank")
     private LocalDate dateOfBirth;
     @NotBlank(message = "Address should not be blank")
     private String address;
