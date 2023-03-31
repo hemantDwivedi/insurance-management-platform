@@ -1,13 +1,13 @@
 package com.insuremyteam.insurancemanagement.service;
 
-import com.insuremyteam.insurancemanagement.payload.InsurancePolicyDAO;
+import com.insuremyteam.insurancemanagement.payload.InsurancePolicyDTO;
 
 import java.util.List;
 
 public interface InsurancePolicyService{
-    InsurancePolicyDAO createInsurancePolicy(InsurancePolicyDAO insurancePolicyDAO);
-    List<InsurancePolicyDAO> getAllPolicy();
-    InsurancePolicyDAO updatePolicy(Integer policyId, InsurancePolicyDAO insurancePolicyDAO);
-    InsurancePolicyDAO getPolicyById(Integer policyId);
+    InsurancePolicyDTO createInsurancePolicy(InsurancePolicyDTO insurancePolicyDTO);
+    List<InsurancePolicyDTO> getAllPolicy();
+    InsurancePolicyDTO updatePolicy(Integer policyId, InsurancePolicyDTO insurancePolicyDTO);
+    InsurancePolicyDTO getPolicyById(Integer policyId);
     void deletePolicyById(Integer policyId);
 }

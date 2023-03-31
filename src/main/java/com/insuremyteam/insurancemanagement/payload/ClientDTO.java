@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class ClientDAO {
+public class ClientDTO {
     private Integer Id;
     @NotBlank(message = "name is mandatory")
     private String name;

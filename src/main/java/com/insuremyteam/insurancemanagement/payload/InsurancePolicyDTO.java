@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class InsurancePolicyDAO {
+public class InsurancePolicyDTO {
 
     private Integer policyId;
 

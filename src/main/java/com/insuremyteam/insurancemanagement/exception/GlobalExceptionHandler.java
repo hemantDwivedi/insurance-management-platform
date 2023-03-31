@@ -1,5 +1,6 @@
 package com.insuremyteam.insurancemanagement.exception;
 
+import com.insuremyteam.insurancemanagement.payload.APIResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +30,19 @@ public class GlobalExceptionHandler {
         Map<String, List<String>> errorMesaage = new HashMap<>();
         errorMesaage.put("errors", errors);
         return errorMesaage;
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<APIResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException resourceNotFoundException){
+        String message = resourceNotFoundException.getMessage();
+        APIResponse apiResponse = new APIResponse(message);
+        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(APIException.class)
+    public ResponseEntity<APIResponse> handleAPIException(APIException e) {
+        String message = e.getMessage();
+        APIResponse response = new APIResponse(message);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

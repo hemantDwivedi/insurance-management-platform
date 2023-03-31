@@ -3,7 +3,7 @@ package com.insuremyteam.insurancemanagement.service.Impl;
 import com.insuremyteam.insurancemanagement.config.ModelMap;
 import com.insuremyteam.insurancemanagement.exception.ResourceNotFoundException;
 import com.insuremyteam.insurancemanagement.models.Client;
-import com.insuremyteam.insurancemanagement.payload.ClientDAO;
+import com.insuremyteam.insurancemanagement.payload.ClientDTO;
 import com.insuremyteam.insurancemanagement.repository.ClientRepository;
 import com.insuremyteam.insurancemanagement.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,43 +22,43 @@ public class ClientServiceImpl implements ClientService {
     private ModelMap modelMap;
 
     @Override
-    public ClientDAO createClient(ClientDAO clientDAO) {
-        Client client = this.modelMap.modelMapper().map(clientDAO, Client.class);
+    public ClientDTO createClient(ClientDTO clientDTO) {
+        Client client = this.modelMap.modelMapper().map(clientDTO, Client.class);
         Client saveClient = this.clientRepository.save(client);
-        return this.modelMap.modelMapper().map(saveClient, ClientDAO.class);
+        return this.modelMap.modelMapper().map(saveClient, ClientDTO.class);
     }
 
     @Override
-    public List<ClientDAO> getAllClient() {
+    public List<ClientDTO> getAllClient() {
         List<Client> clientList = this.clientRepository.findAll();
         return clientList
                 .stream()
                 .map(
-                        client -> this.modelMap.modelMapper().map(client, ClientDAO.class)
+                        client -> this.modelMap.modelMapper().map(client, ClientDTO.class)
                 ).collect(Collectors.toList());
     }
 
     @Override
-    public ClientDAO updateClient(Integer clientId, ClientDAO clientDAO) {
+    public ClientDTO updateClient(Integer clientId, ClientDTO clientDTO) {
         Client client = this.clientRepository.findById(clientId).orElseThrow(
                 () -> new ResourceNotFoundException("client not found with id: " + clientId)
         );
         if (client != null) {
-            client.setName(clientDAO.getName());
-            client.setDateOfBirth(clientDAO.getDateOfBirth());
-            client.setAddress(clientDAO.getAddress());
-            client.setContact(clientDAO.getContact());
+            client.setName(clientDTO.getName());
+            client.setDateOfBirth(clientDTO.getDateOfBirth());
+            client.setAddress(clientDTO.getAddress());
+            client.setContact(clientDTO.getContact());
             this.clientRepository.save(client);
         }
-        return this.modelMap.modelMapper().map(client, ClientDAO.class);
+        return this.modelMap.modelMapper().map(client, ClientDTO.class);
     }
 
     @Override
-    public ClientDAO getClientById(Integer clientId) {
+    public ClientDTO getClientById(Integer clientId) {
         Client client = this.clientRepository.findById(clientId).orElseThrow(
                 () -> new ResourceNotFoundException("client not found with id: " + clientId)
         );
-        return this.modelMap.modelMapper().map(client, ClientDAO.class);
+        return this.modelMap.modelMapper().map(client, ClientDTO.class);
     }
 
     @Override

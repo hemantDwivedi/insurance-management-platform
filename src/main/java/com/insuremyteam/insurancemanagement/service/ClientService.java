@@ -1,14 +1,14 @@
 package com.insuremyteam.insurancemanagement.service;
 
-import com.insuremyteam.insurancemanagement.payload.ClientDAO;
+import com.insuremyteam.insurancemanagement.payload.ClientDTO;
 
 import java.util.List;
 
 public interface ClientService {
 
-    ClientDAO createClient(ClientDAO clientDAO);
-    List<ClientDAO> getAllClient();
-    ClientDAO updateClient(Integer clientId, ClientDAO clientDAO);
-    ClientDAO getClientById(Integer clientId);
+    ClientDTO createClient(ClientDTO clientDTO);
+    List<ClientDTO> getAllClient();
+    ClientDTO updateClient(Integer clientId, ClientDTO clientDTO);
+    ClientDTO getClientById(Integer clientId);
     void deleteClientById(Integer clientId);
 }
