@@ -2,8 +2,12 @@ package com.insuremyteam.insurancemanagement.service.Impl;
 
 import com.insuremyteam.insurancemanagement.config.ModelMap;
 import com.insuremyteam.insurancemanagement.exception.ResourceNotFoundException;
+import com.insuremyteam.insurancemanagement.models.Claim;
+import com.insuremyteam.insurancemanagement.models.Client;
 import com.insuremyteam.insurancemanagement.models.InsurancePolicy;
 import com.insuremyteam.insurancemanagement.payload.InsurancePolicyDTO;
+import com.insuremyteam.insurancemanagement.repository.ClaimRepository;
+import com.insuremyteam.insurancemanagement.repository.ClientRepository;
 import com.insuremyteam.insurancemanagement.repository.InsurancePolicyRepository;
 import com.insuremyteam.insurancemanagement.service.InsurancePolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +23,26 @@ public class InsurancePolicyServiceImpl implements InsurancePolicyService {
     private InsurancePolicyRepository insurancePolicyRepository;
 
     @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private ClaimRepository claimRepository;
+
+    @Autowired
     private ModelMap modelMap;
 
     // create new insurance policy
     @Override
-    public InsurancePolicyDTO createInsurancePolicy(InsurancePolicyDTO insurancePolicyDTO) {
+    public InsurancePolicyDTO createInsurancePolicy(InsurancePolicyDTO insurancePolicyDTO,
+                                                    Integer clientId,
+                                                    Integer claimId) {
         InsurancePolicy insurancePolicy = this.modelMap.modelMapper().map(insurancePolicyDTO, InsurancePolicy.class);
+        Client client = this.clientRepository.findById(clientId).orElseThrow(
+                () -> new ResourceNotFoundException("client not found with id: " + clientId)
+        );
+        Claim claim = this.claimRepository.findById(claimId).orElseThrow(() -> new ResourceNotFoundException("claim not found with id: " + claimId));
+        insurancePolicy.setClient(client);
+        insurancePolicy.setClaim(claim);
         InsurancePolicy savePolicy = this.insurancePolicyRepository.save(insurancePolicy);
         return this.modelMap.modelMapper().map(savePolicy, InsurancePolicyDTO.class);
     }

@@ -31,7 +31,7 @@ public class ClientController {
         return new ResponseEntity<>(this.clientService.getAllClient(), HttpStatus.FOUND);
     }
 
-    // fetch a specific client by Id
+    // fetch a specific client by ID
     @GetMapping("/{clientId}")
     public ResponseEntity<ClientDTO> getClientById(@PathVariable Integer clientId){
         return new ResponseEntity<>(this.clientService.getClientById(clientId), HttpStatus.OK);

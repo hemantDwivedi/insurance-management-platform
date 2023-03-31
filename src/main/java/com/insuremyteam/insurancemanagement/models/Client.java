@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -20,4 +21,7 @@ public class Client {
     private LocalDate dateOfBirth;
     private String address;
     private String contact;
+
+    @OneToMany(mappedBy = "client")
+    private List<InsurancePolicy> policy;
 }

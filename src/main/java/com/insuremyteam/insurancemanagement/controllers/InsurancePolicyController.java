@@ -18,9 +18,11 @@ public class InsurancePolicyController {
     @Autowired
     private InsurancePolicyService service;
 
-    @PostMapping
-    public ResponseEntity<InsurancePolicyDTO> createInsurance(@Valid @RequestBody InsurancePolicyDTO insurancePolicyDTO){
-        return new ResponseEntity<>(this.service.createInsurancePolicy(insurancePolicyDTO), HttpStatus.OK);
+    @PostMapping("/client/{clientId}/claim/{claimId}")
+    public ResponseEntity<InsurancePolicyDTO> createInsurance(@Valid @RequestBody InsurancePolicyDTO insurancePolicyDTO,
+                                                              @PathVariable Integer clientId,
+                                                              @PathVariable Integer claimId){
+        return new ResponseEntity<>(this.service.createInsurancePolicy(insurancePolicyDTO, clientId, claimId), HttpStatus.OK);
     }
 
     @GetMapping
