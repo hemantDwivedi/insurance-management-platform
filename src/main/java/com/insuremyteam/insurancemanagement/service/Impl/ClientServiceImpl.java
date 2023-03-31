@@ -48,6 +48,7 @@ public class ClientServiceImpl implements ClientService {
             client.setDateOfBirth(clientDAO.getDateOfBirth());
             client.setAddress(clientDAO.getAddress());
             client.setContact(clientDAO.getContact());
+            this.clientRepository.save(client);
         }
         return this.modelMap.modelMapper().map(client, ClientDAO.class);
     }

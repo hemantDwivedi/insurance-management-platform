@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class ClientDAO {
+    private Integer Id;
     @NotBlank(message = "name is mandatory")
     private String name;
     private LocalDate dateOfBirth;
