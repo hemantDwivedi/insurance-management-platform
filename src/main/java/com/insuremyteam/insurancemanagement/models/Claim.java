@@ -1,6 +1,5 @@
 package com.insuremyteam.insurancemanagement.models;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,16 +7,16 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "client")
+@Table(name = "claim")
 @Getter
 @Setter
-public class Client {
+public class Claim {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
-    private String name;
-    private LocalDate dateOfBirth;
-    private String address;
-    private String contact;
+    private Integer claimId;
+    private String claimNumber;
+    private String description;
+    private LocalDate claimDate;
+    private String claimStatus;
 }

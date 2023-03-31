@@ -8,16 +8,24 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "client")
+@Table(name = "policy")
 @Getter
 @Setter
-public class Client {
+public class InsurancePolicy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
-    private String name;
-    private LocalDate dateOfBirth;
-    private String address;
-    private String contact;
+    private Integer policyId;
+
+    private String policyNumber;
+
+    private String policyType;
+
+    private double coverageAmount;
+
+    private String premium;
+
+    private LocalDate startDate;
+
+    private LocalDate endDate;
 }
